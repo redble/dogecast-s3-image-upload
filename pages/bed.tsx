@@ -40,7 +40,7 @@ const Upload: React.FC = () => {
   return (
     <div>
       <Helmet>
-       <link href="https://cdn.bootcdn.net/ajax/libs/picocss/1.5.9/pico.min.css" rel="stylesheet">
+       <link href="https://cdn.bootcdn.net/ajax/libs/picocss/1.5.9/pico.min.css" rel="stylesheet" />
       </Helmet>
       <input type="file" ref={fileInputRef} onChange={handleFileInputChange} accept="image/*" />
       <button onClick={() => fileInputRef.current?.click()} disabled={uploading}>
