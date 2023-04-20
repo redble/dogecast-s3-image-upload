@@ -13,6 +13,7 @@ const Upload: React.FC = () => {
   };
 
   const handleUploadButtonClick = async () => {
+    console.log(selectedFile);
     if (selectedFile) {
       setUploading(true);
 
