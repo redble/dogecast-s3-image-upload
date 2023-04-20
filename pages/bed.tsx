@@ -13,7 +13,7 @@ const Upload: React.FC = () => {
   };
 
   const handleUploadButtonClick = async () => {
-    console.log(selectedFile);
+    
     if (selectedFile) {
       setUploading(true);
 
@@ -24,7 +24,7 @@ const Upload: React.FC = () => {
         const res = await fetch('/api/upload', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ data: reader.result })
+          body: JSON.stringify({ data: reader.result,name:selectedFile.name })
         });
 
         if (res.ok) {
