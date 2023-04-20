@@ -42,7 +42,7 @@ export default async function handler(
   })
   const params = {
     Bucket: 'imagebed',
-    CopySource: encodeURIComponent('s3.bitiful.net/imagebed/'+tmp_keys),
+    CopySource: encodeURIComponent('https://s3.bitiful.net/imagebed/'+tmp_keys),
     Key: 'fzjyCPRDJTncIDZ8SytPYLQL',
     ContentType: 'image/*',
   }
