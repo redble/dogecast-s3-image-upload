@@ -29,9 +29,7 @@ const uploadPhoto = async (e: React.ChangeEvent<HTMLInputElement>) => {
   const upload = await fetch(url, {
     method: 'POST',
     body: formData,
-    headers: {
-    'Content-Type': 'image/*',
-    },
+   
   })
 
   if (upload.ok) {
