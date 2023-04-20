@@ -12,7 +12,7 @@ export default async function handler(
     secretAccessKey: 'aELJx0vkTNLryRN7TvBpJGiHf79uRmP',
   })
 
-  const fileType = req.query.fileType
+  const fileType = req.query.fileType as string;
 
   // 验证 Content-Type 是否为图像
   if (!/^image\//.test(fileType)) {
