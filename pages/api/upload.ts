@@ -11,6 +11,9 @@ const s3 = new AWS.S3({
 });
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    // 设置允许跨域的来源
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  
   function getImageType(base64String) {
   const prefix = 'data:image/';
   const suffixIndex = base64String.indexOf(';base64,');
