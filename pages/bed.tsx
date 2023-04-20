@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import Helmet from "react-helmet";
 const Upload: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | undefined>();
   const [previewUrl, setPreviewUrl] = useState<string | undefined>();
@@ -39,6 +39,9 @@ const Upload: React.FC = () => {
 
   return (
     <div>
+      <Helmet>
+       <link href="https://cdn.bootcdn.net/ajax/libs/picocss/1.5.9/pico.min.css" rel="stylesheet">
+      </Helmet>
       <input type="file" ref={fileInputRef} onChange={handleFileInputChange} accept="image/*" />
       <button onClick={() => fileInputRef.current?.click()} disabled={uploading}>
         选择图片
