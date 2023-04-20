@@ -19,6 +19,7 @@ export default async function handler(
     Conditions: [
       ['content-length-range', 0, 1048576], // up to 1 MB
     ],
+    Endpoint:'https://s3.bitiful.net'
   })
 
   res.status(200).json(post)
