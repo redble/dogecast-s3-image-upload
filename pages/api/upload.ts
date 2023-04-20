@@ -11,6 +11,19 @@ const s3 = new AWS.S3({
 });
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  function getImageType(base64String) {
+  const prefix = 'data:image/';
+  const suffixIndex = base64String.indexOf(';base64,');
+  
+  if (suffixIndex === -1) {
+    return null;
+  }
+
+  const mime = base64String.substring(prefix.length, suffixIndex);
+  
+  return mime;
+}
+
  const randstr=(length)=>{
   let result = ''
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
@@ -39,7 +52,7 @@ const tmp_keys=`${randstr(10)}_${req.query.file}`;
     Key: `${randstr(10)}_${name}`,
     Body: base64Data,
     ContentEncoding: 'base64',
-    ContentType: 'image/*'
+    ContentType:  getImageType(data)
   };
 
   try {
