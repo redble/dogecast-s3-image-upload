@@ -42,13 +42,14 @@ export default async function handler(
   })
   const params = {
     Bucket: 'imagebed',
-    CopySource: encodeURIComponent('https://s3.bitiful.net/imagebed/'+tmp_keys),
-    Key: 'fzjyCPRDJTncIDZ8SytPYLQL',
-    ContentType: 'image/*',
+    CopySource:'/imagebed/'+tmp_keys,
+    Key: tmp_keys,
+     MetadataDirective: 'REPLACE', // 替换元数据
+    ContentType: 'image/*', // 修改 Content-Type
   }
  
    s3.copyObject(params, (err, data) => {
-   
+   console.log(data);
   })
   return res.status(200).json(post);
 }
