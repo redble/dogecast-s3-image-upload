@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import axios from 'axios';
+import fetch from 'node-fetch';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'GET') {
@@ -19,10 +19,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   // 从 S3 下载图片到响应流
   try {
-    const response = await axios.get(imageUrl, { responseType: 'stream' });
-    res.setHeader('Content-Type', response.headers['content-type']);
+    const response = await fetch(imageUrl);
+    if (!response.ok) {
+      throw new Error('Response not ok');
+    }
+    const contentType = response.headers.get('content-type');
+    res.setHeader('Content-Type', contentType || 'application/octet-stream');
     res.setHeader('Content-Disposition', `inline; filename="${fileName}"`);
-    response.data.pipe(res);
+    response.body.pipe(res);
   } catch {
     res.status(404).json({msg:'找不到图片'}); // 图片不存在
   }
