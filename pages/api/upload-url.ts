@@ -18,11 +18,21 @@ export default async function handler(
   if (!/^image\//.test(fileType)) {
     return res.status(400).json({ message: '文件类型必须为图像！' })
   }
+  const randstr=(length)=>{
+  let result = ''
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    const charactersLength = characters.length
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength))
+    }
+    return result
 
+  };
+  const tmp_keys=`${randstr(10)}_${req.query.file}`;
   const post = await s3.createPresignedPost({
     Bucket: process.env.BUCKET_NAME,
     Fields: {
-      key: req.query.file,
+      key: tmp_keys,
       'Content-Type': 'image/*',
     },
     Expires: 60, // seconds
@@ -30,6 +40,15 @@ export default async function handler(
       ['content-length-range', 0, 5242880], // up to 5 MB
     ],
   })
-
-  return res.status(200).json(post)
+  const params = {
+    Bucket: 'imagebed',
+    CopySource: encodeURIComponent('s3.bitiful.net/imagebed/'+tmp_keys),
+    Key: 'your-key',
+    ContentType: 'image/*',
+  }
+  let tmp={};
+   s3.copyObject(params, (err, data) => {
+   tmp=data;
+  })
+  return res.status(200).json({info:post,ext:tmp});
 }
