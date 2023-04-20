@@ -50,5 +50,5 @@ export default async function handler(
    s3.copyObject(params, (err, data) => {
    tmp=data;
   })
-  return res.status(200).json({info:post,ext:tmp});
+  return res.status(200).json(post);
 }
