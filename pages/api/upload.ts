@@ -27,19 +27,19 @@ const tmp_keys=`${randstr(10)}_${req.query.file}`;
     return;
   }
 
-  const { data } = req.body;
- res.status(200).json({ data:req.body }); 
-/*
+  const { data,name } = req.body;
+ 
+
   // 解析 base64 编码的图片数据
   const base64Data = Buffer.from(data.replace(/^data:image\/\w+;base64,/, ''), 'base64');
 
   // 构造上传对象的参数
   const params = {
-    Bucket: 'example-bucket',
-    Key: `${Date.now()}.jpg`,
+    Bucket: 'imagebed',
+    Key: `${randstr(10)}_${name}`,
     Body: base64Data,
     ContentEncoding: 'base64',
-    ContentType: 'image/jpeg'
+    ContentType: 'image/*'
   };
 
   try {
@@ -49,6 +49,6 @@ const tmp_keys=`${randstr(10)}_${req.query.file}`;
     res.status(200).json({ url: result.Location }); // 返回上传后的路径
   } catch (error) {
     console.error(error);
-    res.status(500).end(); // 服务器错误
-  }*/
+    res.status(500).json({msg:error.message}); // 服务器错误
+  }
 }
