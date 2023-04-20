@@ -7,6 +7,7 @@ export default async function handler(
 ) {
   const s3 = new S3({
     apiVersion: '2006-03-01',
+      endpoint: 'https://s3.bitiful.net',
   })
 
   const post = await s3.createPresignedPost({
@@ -19,7 +20,7 @@ export default async function handler(
     Conditions: [
       ['content-length-range', 0, 1048576], // up to 1 MB
     ],
-    Endpoint:'https://s3.bitiful.net'
+   
   })
 
   res.status(200).json(post)
