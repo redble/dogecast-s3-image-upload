@@ -23,7 +23,7 @@ export default async function handler(
     Bucket: process.env.BUCKET_NAME,
     Fields: {
       key: req.query.file,
-      'Content-Type': fileType,
+      'Content-Type': 'image/*',
     },
     Expires: 60, // seconds
     Conditions: [
