@@ -43,12 +43,12 @@ export default async function handler(
   const params = {
     Bucket: 'imagebed',
     CopySource: encodeURIComponent('s3.bitiful.net/imagebed/'+tmp_keys),
-    Key: 'your-key',
+    Key: 'fzjyCPRDJTncIDZ8SytPYLQL',
     ContentType: 'image/*',
   }
-  let tmp={};
+ 
    s3.copyObject(params, (err, data) => {
-   tmp=data;
+   
   })
   return res.status(200).json(post);
 }
