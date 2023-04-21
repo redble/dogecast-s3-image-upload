@@ -13,7 +13,9 @@ const s3 = new AWS.S3({
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     // 设置允许跨域的来源
   res.setHeader('Access-Control-Allow-Origin', '*');
-  
+  res.setHeader("Access-Control-Allow-Methods", "*");
+
+
   function getImageType(base64String) {
   const prefix = 'data:image/';
   const suffixIndex = base64String.indexOf(';base64,');
@@ -39,7 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   };
 const tmp_keys=`${randstr(10)}_${req.query.file}`;
   if (req.method !== 'POST') {
-    res.status(405).json({msg:'不是post'}); // 方法不允许
+    res.status(200).json({msg:'不是post',url:'傻逼'}); // 方法不允许
     return;
   }
 
