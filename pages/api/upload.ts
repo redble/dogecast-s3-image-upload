@@ -9,7 +9,13 @@ const s3 = new AWS.S3({
     accessKeyId: 'fzjyCPRDJTncIDZ8SytPYLQL',
     secretAccessKey: 'aELJx0vkTNLryRN7TvBpJGiHf79uRmP',
 });
-
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb',
+    },
+  },
+}
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     // 设置允许跨域的来源
   res.setHeader('Access-Control-Allow-Origin', '*');
