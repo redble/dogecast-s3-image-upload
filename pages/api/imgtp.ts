@@ -2,9 +2,11 @@ import axios from 'axios';
 import FormData from 'form-data';
 
 export default async function handler(req, res) {
-  try {
-    res.setHeader('Access-Control-Allow-Origin', '*');
+
+  res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader("Access-Control-Allow-Methods", "*");
+  try {
+    
     console.info(req);
     if (req.method !== 'POST') {
       return res.status(405).json({ error: 'Method Not Allowed' });
