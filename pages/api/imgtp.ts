@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     res.setHeader("Access-Control-Allow-Methods", "*");
   try {
     
-    console.info(req);
+    console.info(req.body);
     if (req.method !== 'POST') {
       return res.status(405).json({ error: 'Method Not Allowed' });
     }
